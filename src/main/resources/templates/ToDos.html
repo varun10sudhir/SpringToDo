@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your ToDos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">New Todo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">View your Todos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</body>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Username</th>
+    <th scope="col">Description</th>
+    <th scope="col">TargetDate</th>
+    <th scope="col">Status</th>
+    <th scope="col">Delete</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="todo: ${todos}">
+    <td></td> <!-- Index starts from 0, so add 1 for display -->
+    <td th:text="${todo.username}"></td>
+    <td th:text="${todo.description}"></td>
+    <td th:text="${todo.targetDate}"></td>
+    <td>
+      <a class="btn btn-info" th:text="${todo.status}"></a>
+    </td>
+    <td>
+      <form action="#" th:action="@{'/deleteTodo?description=' + ${todo.description}}" method="post">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+      </form>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/newtodo}">
+<button type="button" class="btn btn-outline-success" >Add Todo</button>
+</a>
+
+</html>
